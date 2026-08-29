@@ -1,0 +1,44 @@
+1010-bot/
+├── main.py
+│
+├── Game/
+│   ├── __init__.py
+│   ├── board.py
+│   ├── piece.py
+│   ├── pieces.py
+│   └── game.py
+│
+├── Solver/
+│   ├── solution.py
+│   ├── move.py
+│   ├── solver.py
+│   └── evaluator.py
+|
+├── Test/
+│   ├── board_test.py
+│   ├── piece_test.py
+│   ├── evaluator_test.py
+│   ├── text_board.py
+|
+├── java/
+│   └── GameUI/
+│       ├── GameUI.pde
+│       ├── BoardRenderer.pde
+│       ├── PieceRenderer.pde
+│       ├── Animation.pde
+│       ├── pieces.pde
+│       └── GameState.pde
+│
+└── shared/
+    └── communication/
+
+
+
+SOLVER
+│
+├── gerar posições válidas
+├── testar todas as ordens
+├── simular jogada
+├── limpar linhas
+├── avaliar resultado
+└── retornar melhor sequência
