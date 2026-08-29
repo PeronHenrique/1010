@@ -29,7 +29,7 @@ class Board:
             return False
 
         # Colisão
-        return not (self.bits & (piece.mask << (row * SIZE + col)))
+        return not (self.bits & (piece.bits << (row * SIZE + col)))
 
     def place(self, index: int, row: int, col: int) -> tuple[list[int], list[int]]:
         piece: Piece = PIECES[index]
@@ -37,7 +37,7 @@ class Board:
         if not self.can_place(index, row, col):
             raise ValueError("Jogada inválida")
 
-        self.bits |= piece.mask << (row * SIZE + col)
+        self.bits |= piece.bits << (row * SIZE + col)
         return self.clear_completed()
 
     def clear_completed(self) -> tuple[list[int], list[int]]:

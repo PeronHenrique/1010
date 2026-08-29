@@ -1,26 +1,41 @@
-from Game import SIZE
+from Game import SIZE, bits_from_string
 
 class Piece:
-    def __init__(self, name: str, cells: list[tuple[int, int]]):
-        self.name: str = name
+    def __init__(self, name: str, shape: str):
+        self.name = name
+        self.bits = bits_from_string(shape)
 
-        # Dimensões da peça
-        self.width: int = max(col for _, col in cells) + 1
-        self.height: int = max(row for row, _ in cells) + 1
+        positions = [
+            i for i in range(self.bits.bit_length())
+            if self.bits & (1 << i)
+        ]
 
-        # Converte cells para bitboard SIZExSIZE
-        self.mask: int = 0
+        rows = [pos // SIZE for pos in positions]
+        cols = [pos % SIZE for pos in positions]
 
-        for row, col in cells:
-            position = row * SIZE + col
-            self.mask |= 1 << position
+        self.width = max(cols) - min(cols) + 1
+        self.height = max(rows) - min(rows) + 1
+
+    def __repr__(self) -> str:
+        piece_str = (
+            f"Name: {self.name}\n"
+            f"Dimentions: {self.width} x {self.height}" 
+            )
+        
+        for row in range(self.height):
+            line = []
+            for col in range(self.width):
+                line.append("X" if bool(self.bits & (1 << (row * SIZE + col))) else ".")
+            piece_str = piece_str + f'\n{" ".join(line)}'
+
+        return piece_str
+
+
 
     def print(self) -> None:
         for row in range(self.height):
             line = []
             for col in range(self.width):
-                line.append(
-                    "X" if bool(self.mask & (1 << (row * SIZE + col))) else "."
-                )
+                line.append("X" if bool(self.bits & (1 << (row * SIZE + col))) else ".")
 
             print(" ".join(line))

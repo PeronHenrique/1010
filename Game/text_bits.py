@@ -1,6 +1,6 @@
-from Game import Board, SIZE
+from Game import SIZE
 
-def board_from_string(board_str: str) -> Board:
+def bits_from_string(board_str: str) -> int:
     lines = [
         line.strip()
         for line in board_str.strip().splitlines()
@@ -13,10 +13,10 @@ def board_from_string(board_str: str) -> Board:
     bits = 0
 
     for row, line in enumerate(lines):
-        for col, cell in enumerate(line.split()):
+        for col, cell in enumerate(line):
             if cell == "X":
                 bits |= 1 << (row * SIZE + col)
             elif cell != ".":
                 raise ValueError(f"Célula inválida: {cell}")
 
-    return Board(bits)
+    return bits

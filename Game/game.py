@@ -24,7 +24,7 @@ class Game:
         piece: Piece = PIECES[piece_index]
         rows, cols = self.board.place(piece_index, row, col)
 
-        points: int = piece.mask.bit_count()
+        points: int = piece.bits.bit_count()
         cleared: int = len(rows) + len(cols)
         points += cleared * (cleared + 1) * SIZE / 2
 
