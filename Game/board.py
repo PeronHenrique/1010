@@ -76,7 +76,7 @@ class Board:
 
         return positions
 
-    def is_empty(self, col: int, row: int) -> bool:
+    def is_empty(self, row: int, col: int) -> bool:
         position = row * SIZE + col
         return not (self.bits & (1 << position))
 

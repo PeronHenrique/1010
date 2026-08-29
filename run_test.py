@@ -1,9 +1,4 @@
-from Test import print_pieces, create_board
-
-def run_test() -> None:
-	# print_pieces()
-	create_board()
-	
+from Test import print_pieces
 
 if __name__ == "__main__":
-	run_test()
+	print_pieces()
