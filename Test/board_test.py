@@ -100,3 +100,10 @@ def test_multiple_lines():
 	assert rows == [0]
 	assert cols == [0]
 	assert board.bits == 0
+
+def test_get_positions():
+	board = Board()
+
+	for piece_index in range(len(PIECES)):
+		count = len(board.get_valid_positions(piece_index))
+		assert count == (SIZE - PIECES[piece_index].width + 1) * (SIZE - PIECES[piece_index].height + 1)

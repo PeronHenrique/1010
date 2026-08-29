@@ -1,2 +1,2 @@
 SIZE = 10
-N_PIECES = 1
+N_PIECES = 2

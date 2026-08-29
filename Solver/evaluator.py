@@ -1,28 +1,28 @@
-from Game import Board, SIZE
+from Game import Board, SIZE, PIECES
 
-#TODO: posições possiveis para as maiores peças
 def evaluate(board: Board) -> float:
-    empty_cells = board.empty_cells()
-    filled_regions = regions(board, False)
-    empty_regions = regions(board, True)
-    near_lines = count_near_complete_lines(board)
+    filled_regions = get_regions(board, False)
+    empty_regions = get_regions(board, True)
 
+    near_lines_points = count_near_complete_lines(board)
+    empty_cells = board.empty_cells()
     count_regions_empty = len(empty_regions)
     largest_region_empty = max([size for size, _ in empty_regions])
     count_regions_filled = len(filled_regions)
     largest_region_filled = max([size for size, _ in filled_regions])
     perimeter = sum([perimeter for _, perimeter in filled_regions])
-
     isolated = sum([1 if size == 1 else 0 for size, _ in empty_regions])
     holes = sum([1 if size <= 3 else 0 for size, _ in empty_regions])
 
-    #TODO: calculate score based on filled regions
+    positions = [len(board.get_valid_positions(piece_index)) for piece_index in range(len(PIECES))]
+
+    #TODO: calculate score based on filled regions and position count
 
     evaluation = (
         + empty_cells * 2
         + largest_region_empty * 1.5
         + largest_region_filled * 1.5
-        + near_lines * 2
+        + near_lines_points * 2
         - perimeter
         - holes * 5
         - isolated * 5
@@ -46,7 +46,7 @@ def count_near_complete_lines(board: Board) -> int:
                 filled += 1
 
         if filled >= SIZE - 2:
-            count += filled - SIZE - 3
+            count += filled - (SIZE - 3)
 
     for col in range(SIZE):
         filled = 0
@@ -56,7 +56,7 @@ def count_near_complete_lines(board: Board) -> int:
                 filled += 1
                 
         if filled >= SIZE - 2:
-            count += filled - SIZE - 3
+            count += filled - (SIZE - 3)
 
     return count
 
@@ -68,6 +68,7 @@ def flood_fill(board: Board, start_row: int, start_col: int, visited: set, empty
     stack = [(start_row, start_col)]
     size = 0
     perimeter = 0
+    entry = True
 
     while stack:
         row, col = stack.pop()
@@ -80,11 +81,15 @@ def flood_fill(board: Board, start_row: int, start_col: int, visited: set, empty
             continue
 
         if empty ^ board.is_empty(row, col):
-            perimeter += 1
+            if entry:
+                entry = False
+            else:
+                perimeter += 1
             continue
 
         visited.add((row, col))
         size += 1
+        entry = False
 
         stack.append((row - 1, col))
         stack.append((row + 1, col))
@@ -96,13 +101,14 @@ def flood_fill(board: Board, start_row: int, start_col: int, visited: set, empty
 #Retorna lista com (size, perimeter) das regiões ortogonalmente conectadas
 # empty = False regiões preenchidas
 # empty = True regiões vazias
-def regions(board: Board, empty: bool) -> int:
+def get_regions(board: Board, empty: bool) -> int:
     visited = set()
     regions = []
 
     for row in range(SIZE):
         for col in range(SIZE):
-            regions.append(flood_fill(board, row, col, visited, empty))
+            region = flood_fill(board, row, col, visited, empty)    
+            if region != (0, 0):
+                regions.append(region)
 
     return regions
-
