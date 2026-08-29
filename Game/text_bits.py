@@ -7,7 +7,7 @@ def bits_from_string(board_str: str) -> int:
         if line.strip()
     ]
 
-    if any(len(line.split()) > SIZE for line in lines):
+    if any(len(line) > SIZE for line in lines) or len(lines) > SIZE:
         raise ValueError("Board invalido")
 
     bits = 0
