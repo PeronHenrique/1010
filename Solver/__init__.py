@@ -1,7 +1,7 @@
 from .move import Move
 from .solution import Solution
 from .evaluator import evaluate, count_near_complete_lines, flood_fill, get_regions
-from .solver import Solver
+from .solver import solve
 
 
 #TODO: 
