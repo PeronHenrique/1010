@@ -8,9 +8,12 @@ from Solver import Move, Solution, evaluate
 class Solver:
     def solve(self, board: Board, pieces: list[int]) -> Solution:
         best_solution: Solution = None
+        
+        #(board.bits, piecesleft_sorted)
+        memo = set()
 
         for ordered_pieces in permutations(pieces):
-            candidate: Solution = _dfs(board=board.copy(), indicies=ordered_pieces)
+            candidate: Solution = _dfs(board=board.copy(), indicies=ordered_pieces, memo=memo)
 
             # Uma ordem pode não permitir jogar todas as peças
             if candidate is None:
@@ -23,8 +26,15 @@ class Solver:
     
 
 
-def _dfs(board: Board, indicies: list[int],
+def _dfs(board: Board, indicies: list[int], memo: set[tuple[int, tuple[int]]],
         index: int =0, moves: list[Move] = []) -> Solution:
+    l = list(indicies)
+    l = l[index:]
+    l.sort()
+    key = (board.bits, tuple(l))
+    if key in memo:
+        print("Hello World")
+        return None
 
     if index == len(indicies):
         evaluation = evaluate(board)
@@ -43,9 +53,16 @@ def _dfs(board: Board, indicies: list[int],
         result: Solution = _dfs(
             board = new_board,
             indicies=indicies,
+            memo=memo,
             index=index + 1,
             moves=moves,
         )
+
+        l = list(indicies)
+        l = l[index:]
+        l.sort()
+        key = (board.bits, tuple(l))
+        memo.add(key)
 
         moves.pop()
 

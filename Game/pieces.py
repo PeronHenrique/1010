@@ -103,25 +103,25 @@ PIECES: list[Piece] = [
         XXX
     """),
 
-    Piece("T - 2.1", """
+    Piece("T - 1.1", """
         XXX
         .X.
         .X.
     """),
 
-    Piece("T - 2.2", """
+    Piece("T - 1.2", """
         ..X
         XXX
         ..X
     """),
 
-    Piece("T - 2.3", """
+    Piece("T - 1.3", """
         .X.
         .X.
         XXX
     """),
 
-    Piece("T - 2.4", """
+    Piece("T - 1.4", """
         X..
         XXX
         X..
