@@ -1,2 +1,2 @@
-SIZE = 8
+SIZE = 6
 N_PIECES = 3

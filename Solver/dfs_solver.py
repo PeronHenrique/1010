@@ -3,8 +3,7 @@ from typing import Callable
 from Game import Board
 from Solver import Move, Solution
 
-# TODO: memoization
-def solve(board: Board, pieces: list[int], eval: Callable[[Board], int]) -> Solution | None:
+def dfs_solve(board: Board, pieces: list[int], eval: Callable[[Board], int]) -> Solution | None:
     memo = {}
     solution = _dfs(board=board.copy(), pieces_left=pieces.copy(), memo=memo, eval=eval)
     print(len(memo))

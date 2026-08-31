@@ -11,11 +11,11 @@ PIECES: list[Piece] = [
         XX
     """),
 
-    Piece("square_3", """
-        XXX
-        XXX
-        XXX
-    """),
+    # Piece("square_3", """
+    #     XXX
+    #     XXX
+    #     XXX
+    # """),
 
     Piece("horizontal_2", """
         XX
@@ -25,13 +25,13 @@ PIECES: list[Piece] = [
         XXX
     """),
 
-    Piece("horizontal_4", """
-        XXXX
-    """),
+    # Piece("horizontal_4", """
+    #     XXXX
+    # """),
 
-    Piece("horizontal_5", """
-        XXXXX
-    """),
+    # Piece("horizontal_5", """
+    #     XXXXX
+    # """),
 
     Piece("vertical_2", """
         X
@@ -44,20 +44,20 @@ PIECES: list[Piece] = [
         X
     """),    
 
-    Piece("vertical_4", """
-        X
-        X
-        X
-	X
-    """),
+    # Piece("vertical_4", """
+    #     X
+    #     X
+    #     X
+	#     X
+    # """),
 	
-    Piece("vertical_5", """
-        X
-        X
-        X
-	X
-	X
-    """),
+    # Piece("vertical_5", """
+    #     X
+    #     X
+    #     X
+	#     X
+	#     X
+    # """),
 
    Piece("L - 1.1", """
         XX
@@ -79,51 +79,51 @@ PIECES: list[Piece] = [
         XX
     """),
 
-    Piece("L - 2.1", """
-        XXX
-        X..
-        X..
-    """),
+    # Piece("L - 2.1", """
+    #     XXX
+    #     X..
+    #     X..
+    # """),
 
-    Piece("L - 2.2", """
-        XXX
-        ..X
-        ..X
-    """),
+    # Piece("L - 2.2", """
+    #     XXX
+    #     ..X
+    #     ..X
+    # """),
 
-    Piece("L - 2.3", """
-        ..X
-        ..X
-        XXX
-    """),
+    # Piece("L - 2.3", """
+    #     ..X
+    #     ..X
+    #     XXX
+    # """),
 
-    Piece("L - 2.4", """
-        X..
-        X..
-        XXX
-    """),
+    # Piece("L - 2.4", """
+    #     X..
+    #     X..
+    #     XXX
+    # """),
 
-    Piece("T - 1.1", """
-        XXX
-        .X.
-        .X.
-    """),
+    # Piece("T - 1.1", """
+    #     XXX
+    #     .X.
+    #     .X.
+    # """),
 
-    Piece("T - 1.2", """
-        ..X
-        XXX
-        ..X
-    """),
+    # Piece("T - 1.2", """
+    #     ..X
+    #     XXX
+    #     ..X
+    # """),
 
-    Piece("T - 1.3", """
-        .X.
-        .X.
-        XXX
-    """),
+    # Piece("T - 1.3", """
+    #     .X.
+    #     .X.
+    #     XXX
+    # """),
 
-    Piece("T - 1.4", """
-        X..
-        XXX
-        X..
-    """),
+    # Piece("T - 1.4", """
+    #     X..
+    #     XXX
+    #     X..
+    # """),
 ]

@@ -1,6 +1,6 @@
 from Test import print_pieces
 from Game import Game
-from Solver import solve, evaluate, evaluate_empty_cells
+from Solver import dfs_solve, evaluate, evaluate_empty_cells
 import time
 
 
@@ -10,11 +10,11 @@ game = Game()
 game.new_round()
 
 start = time.perf_counter()
-solve(game.board, game.pieces, evaluate_empty_cells)
+dfs_solve(game.board, game.pieces, evaluate_empty_cells)
 end = time.perf_counter()
 print(f"Tempo: {end - start:.6f} segundos")
 
 start = time.perf_counter()
-solve(game.board, game.pieces, evaluate)
+dfs_solve(game.board, game.pieces, evaluate)
 end = time.perf_counter()
 print(f"Tempo: {end - start:.6f} segundos")

@@ -1,12 +1,12 @@
 from Game import Game
-from Solver import Solution, solve
+from Solver import Solution, dfs_solve, evaluate
 
 def main():
 	game = Game()
 
 	while not game.is_gameover():
 		game.print()
-		solution: Solution = solve(game.board, game.pieces)
+		solution: Solution = dfs_solve(game.board, game.pieces, evaluate)
 
 		if not solution:
 			break
@@ -15,8 +15,6 @@ def main():
 		for move in solution.moves:
 			print(f"\nJogando em ({move.row}, {move.col})")
 			game.play(move.index, move.row, move.col)
-
-		break			
 			
 	print("GAME OVER")
 	game.print()
