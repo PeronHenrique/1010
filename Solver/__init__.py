@@ -1,6 +1,6 @@
 from .move import Move
 from .solution import Solution
-from .evaluator import evaluate, count_near_complete_lines, flood_fill, get_regions
+from .evaluator import evaluate, evaluate_empty_cells, count_near_complete_lines, flood_fill, get_regions
 from .solver import solve
 
 

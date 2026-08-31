@@ -1,26 +1,26 @@
-from itertools import permutations
+from typing import Callable
 
 from Game import Board
-from Solver import Move, Solution, evaluate
+from Solver import Move, Solution
 
 # TODO: memoization
-def solve(board: Board, pieces: list[int]) -> Solution | None:
+def solve(board: Board, pieces: list[int], eval: Callable[[Board], int]) -> Solution | None:
     memo = {}
-    solution = _dfs(board=board.copy(), pieces_left=pieces.copy(), memo=memo)
+    solution = _dfs(board=board.copy(), pieces_left=pieces.copy(), memo=memo, eval=eval)
     print(len(memo))
     return solution
     
 
-def _dfs(board: Board, pieces_left: list[int], memo: dict) -> Solution | None:
+def _dfs(board: Board, pieces_left: list[int], memo: dict, eval: Callable[[Board], int]) -> Solution | None:
     # Estado equivalente:
     # mesma posição do tabuleiro + mesmas peças disponíveis
-    key = (board.bits, tuple(sorted(pieces_left)))
+    key = board.bits
     if key in memo:
         return memo[key]
 
     # Não há mais peças para jogar
     if not pieces_left:
-        solution = Solution(moves=[], board_bits=board.bits, evaluation=evaluate(board))
+        solution = Solution(moves=[], board_bits=board.bits, evaluation=eval(board))
         memo[key] = solution
         return solution
 
@@ -41,7 +41,7 @@ def _dfs(board: Board, pieces_left: list[int], memo: dict) -> Solution | None:
             new_board = board.copy()
             new_board.place(piece_index, row, col)
             move = Move(index=piece_index, row=row, col=col)
-            result = _dfs(board=new_board, pieces_left=remaining, memo=memo)
+            result: Solution = _dfs(board=new_board, pieces_left=remaining, memo=memo, eval=eval)
             if result is None:
                 continue
 

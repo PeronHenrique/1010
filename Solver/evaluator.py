@@ -1,4 +1,6 @@
 from Game import Board, SIZE, PIECES
+def evaluate_empty_cells(board: Board) -> float:
+    return board.empty_cells()
 
 def evaluate(board: Board) -> float:
     filled_regions = get_regions(board, False)
@@ -18,18 +20,16 @@ def evaluate(board: Board) -> float:
 
     #TODO: calculate score based on filled regions and position count
 
-    evaluation = (
-        + empty_cells * 2
-        + largest_region_empty * 1.5
-        + largest_region_filled * 1.5
-        + near_lines_points * 2
-        - perimeter
-        - holes * 5
-        - isolated * 5
-        - count_regions_empty * 10 
-        - count_regions_filled * 5
-    )
-
+    evaluation =  empty_cells * 2 
+    + largest_region_empty * 1.5 
+    + largest_region_filled * 1.5  
+    + near_lines_points * 2 
+    - perimeter
+    - holes * 5 
+    - isolated * 5 
+    - count_regions_empty * 10  
+    - count_regions_filled * 5
+    
     return evaluation
 
 # Conta linhas e colunas com SIZE - 2 ou SIZE - 1 preenchido
